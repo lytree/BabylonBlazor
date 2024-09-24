@@ -1,54 +1,63 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <PackageId>Babylon.Blazor</PackageId>
-    <Authors>Alex Nek</Authors>
-    <Company>private</Company>
-    <Product>Balylon.Blazor</Product>
-    <Description>This library packages the well-known 3D library [Babylon.js](https://www.babylonjs.com/) into a Razor component that can be used in a C# Blazor project.
-The library is intended to use for creation of molecules visualization and used limited API of Babylon library.
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
+        <PackageId>Babylon.Blazor</PackageId>
+        <Authors>Alex Nek</Authors>
+        <Company>private</Company>
+        <Product>Balylon.Blazor</Product>
+        <Description>
+            This library packages the well-known 3D library [Babylon.js](https://www.babylonjs.com/) into a Razor component that can be used in a C# Blazor project.
+            The library is intended to use for creation of molecules visualization and used limited API of Babylon library.
 
-More info on [github](https://github.com/AlexNek/BabylonBlazor)
-</Description>
-    <AssemblyName>Babylon.Blazor</AssemblyName>
-    <RootNamespace>Babylon.Blazor</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <RepositoryUrl>https://github.com/AlexNek/BabylonBlazor</RepositoryUrl>
-    <PackageTags>babylon.js blazor net8.0 web 3d</PackageTags>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Title>Babylon.Blazor</Title>
-    <PackageProjectUrl>https://github.com/AlexNek/BabylonBlazor</PackageProjectUrl>
-    <Copyright>Alex Nek</Copyright>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <AssemblyVersion>1.4.0</AssemblyVersion>
-    <FileVersion>1.4.0</FileVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Babylon\BabylonFactory.cs" />
-    <Compile Remove="Babylon\BabylonObjectOld.cs" />
-    <Compile Remove="Babylon\IBabylonFactory.cs" />
-    <Compile Remove="Babylon\JsRuntimeObjectRef.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GitVersion.MsBuild" Version="5.8.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
-    <None Include="..\readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+            More info on [github](https://github.com/AlexNek/BabylonBlazor)
+        </Description>
+        <AssemblyName>Babylon.Blazor</AssemblyName>
+        <RootNamespace>Babylon.Blazor</RootNamespace>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <RepositoryUrl>https://github.com/AlexNek/BabylonBlazor</RepositoryUrl>
+        <PackageTags>babylon.js blazor net8.0 web 3d</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Title>Babylon.Blazor</Title>
+        <PackageProjectUrl>https://github.com/AlexNek/BabylonBlazor</PackageProjectUrl>
+        <Copyright>Alex Nek</Copyright>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <AssemblyVersion>1.4.0</AssemblyVersion>
+        <FileVersion>1.4.0</FileVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Remove="Babylon\BabylonFactory.cs" />
+        <Compile Remove="Babylon\BabylonObjectOld.cs" />
+        <Compile Remove="Babylon\IBabylonFactory.cs" />
+        <Compile Remove="Babylon\JsRuntimeObjectRef.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
+        <PackageReference Include="GitVersion.MsBuild" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        
+    </ItemGroup>
+
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>
+            </PackagePath>
+        </None>
+        <None Include="..\readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 </Project>

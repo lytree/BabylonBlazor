@@ -1,8 +1,11 @@
 ﻿@page "/epinephrine"
 @using Babylon.Blazor
 @using Babylon.Blazor.Chemical
-@* @rendermode InteractiveWebAssembly *@
+#if NET8_OR_GREATER
+
 @rendermode InteractiveAuto
+@* @rendermode InteractiveWebAssembly *@
+#endif
 
 <h3>Epinephrine</h3>
 <p> Chemical formula of Epinephrine is C<sub>9</sub>H<sub>13</sub>NO<sub>3</sub></p>

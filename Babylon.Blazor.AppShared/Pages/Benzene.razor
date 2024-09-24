@@ -1,8 +1,11 @@
 ﻿@page "/benzene"
 @using Babylon.Blazor.Chemical
+
+#if NET8_OR_GREATER
+
 @rendermode InteractiveAuto
 @* @rendermode InteractiveWebAssembly *@
-
+#endif
 
 <h1>Benzene</h1>
 <p> Chemical formula of Benzene is C<sub>6</sub>H<sub>6</sub></p>

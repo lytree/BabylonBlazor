@@ -3,7 +3,11 @@
 @using Babylon.Blazor
 @using BabylonBlazor.AppShared.Custom
 @inherits BabylonCanvasBase
+#if NET8_OR_GREATER
+
 @rendermode InteractiveAuto
+@* @rendermode InteractiveWebAssembly *@
+#endif
 
 
 <h3>Sprite Example</h3>

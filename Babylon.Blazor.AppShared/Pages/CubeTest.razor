@@ -1,6 +1,10 @@
 ﻿@page "/test"
 @using Babylon.Blazor.Chemical
+#if NET8_OR_GREATER
+
 @rendermode InteractiveAuto
+@* @rendermode InteractiveWebAssembly *@
+#endif
 
 <h1>Drawing test</h1>
 

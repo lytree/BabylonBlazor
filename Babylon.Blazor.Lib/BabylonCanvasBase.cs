@@ -15,7 +15,7 @@ namespace Babylon.Blazor
     /// Implements the <see cref="Microsoft.AspNetCore.Components.ComponentBase" />
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Components.ComponentBase" />
-    public class BabylonCanvasBase : ComponentBase
+    public partial class BabylonCanvasBase : ComponentBase
     {
         private BabylonInstance _babylonInstance;
 

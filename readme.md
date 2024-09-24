@@ -1,3 +1,6 @@
+
+> fork https://github.com/AlexNek/BabylonBlazor
+
 # Babylon.Blazor 
 [![Build status](https://ci.appveyor.com/api/projects/status/c6hl19cdakmoxjiq?svg=true)](https://ci.appveyor.com/project/AlexNek/babylonblazor) [![Publish Status](https://img.shields.io/github/workflow/status/AlexNek/BabylonBlazor/Publish?label=publish)](https://www.nuget.org/packages/BaBylon.Blazor/)  [![NuGet Status](https://img.shields.io/nuget/v/Babylon.Blazor)](https://www.nuget.org/packages/Babylon.Blazor/)
 
@@ -50,11 +53,11 @@ You will also need to add a reference to babylonInterop.js.
 
 ```html
 <body>
-    <Routes />
-    <script src="https://preview.babylonjs.com/babylon.js"></script>
-    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-    <script type="module" src="_content/Babylon.Blazor/babylonInterop.js"></script>
-    <script src="_framework/blazor.web.js"></script>
+	<Routes />
+	<script src="https://preview.babylonjs.com/babylon.js"></script>
+	<script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+	<script type="module" src="_content/Babylon.Blazor/babylonInterop.js"></script>
+	<script src="_framework/blazor.web.js"></script>
 </body>
 ```
 
@@ -62,14 +65,14 @@ Add `InstanceCreator` to **DI**
 *Server Part*
 ```C#
  public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-       ...
-           builder.Services.AddTransient<InstanceCreatorBase>(sp => new InstanceCreatorAsyncMode(sp.GetService<IJSRuntime>()));
-           var app = builder.Build(); 
-        }
-    }
+	{
+		public static async Task Main(string[] args)
+		{
+	   ...
+		   builder.Services.AddTransient<InstanceCreatorBase>(sp => new InstanceCreatorAsyncMode(sp.GetService<IJSRuntime>()));
+		   var app = builder.Build(); 
+		}
+	}
 ```
 > **Note** Server side support only `IJSObjectReference`
 
@@ -96,26 +99,26 @@ Add Razor page and replace context to similar code
 
 @code {
 
-    ChemicalData PanelData { get; } = new ChemicalData();
+	ChemicalData PanelData { get; } = new ChemicalData();
 
-    async Task InitDataAsync()
-    {
-        // Fake await line
-        await Task.FromResult(1);
+	async Task InitDataAsync()
+	{
+		// Fake await line
+		await Task.FromResult(1);
 
 
-        PanelData.Atoms.Add(new AtomDescription() { Name = "O", X = 2.5369, Y = -0.1550, Z = 0.0000 });
-        PanelData.Atoms.Add(new AtomDescription() { Name = "H", X = 3.0739, Y =  0.1550, Z = 0.0000 });
-        PanelData.Atoms.Add(new AtomDescription() { Name = "H", X = 2.0000, Y =  0.1550, Z = 0.0000 });
+		PanelData.Atoms.Add(new AtomDescription() { Name = "O", X = 2.5369, Y = -0.1550, Z = 0.0000 });
+		PanelData.Atoms.Add(new AtomDescription() { Name = "H", X = 3.0739, Y =  0.1550, Z = 0.0000 });
+		PanelData.Atoms.Add(new AtomDescription() { Name = "H", X = 2.0000, Y =  0.1550, Z = 0.0000 });
 
-        PanelData.Bonds.Add(new BondDescription(1, 2,  BondDescription.BondType.Single));
-        PanelData.Bonds.Add(new BondDescription(1, 3, BondDescription.BondType.Single));
-    }
+		PanelData.Bonds.Add(new BondDescription(1, 2,  BondDescription.BondType.Single));
+		PanelData.Bonds.Add(new BondDescription(1, 3, BondDescription.BondType.Single));
+	}
 
-    protected override async Task OnInitializedAsync()
-    {
-        await InitDataAsync();
-    }
+	protected override async Task OnInitializedAsync()
+	{
+		await InitDataAsync();
+	}
 
 }
 ```
@@ -167,14 +170,14 @@ Here is the steps you need to wrap JS library for Blazor Web Assembly applicatio
 2. Create under wwwroot js export file with functions like this:
 ```JavaScript
 export function functionName(parameters) {
-        ...
-        return javaObject;
+		...
+		return javaObject;
 }
 ```
 3. Create library wrapper
 ```C#
 IJSInProcessObjectReference libraryWrapper = await _jSInstance.InvokeAsync<IJSInProcessObjectReference>("import",
-                                                             "./_content/LibraryName/LibraryJSExport.js");
+															 "./_content/LibraryName/LibraryJSExport.js");
 ```
 > **_NOTE:_**  You can get _jSInstance into main application over dependency injection or service provider call
 
@@ -182,8 +185,8 @@ IJSInProcessObjectReference libraryWrapper = await _jSInstance.InvokeAsync<IJSIn
 ```C#
 public async Task<CsharpObj> CsFunctionName(int parameter)
 {
-        var jsObjRef = await _libraryWrapper.InvokeAsync<IJSObjectReference>("jsFunctionName", parameter);
-        return new CsharpObj(jsObjRef);
+		var jsObjRef = await _libraryWrapper.InvokeAsync<IJSObjectReference>("jsFunctionName", parameter);
+		return new CsharpObj(jsObjRef);
 }
 ```
 5. Call the wrapped function
@@ -199,10 +202,10 @@ If you don't want to draw molecules then it is possible to create your own compo
 ```C#
 public class MySceneCreator : SceneCreator
 {
-    public override async Task CreateAsync(BabylonCanvasBase canvas)
-    {
-    ...
-    }
+	public override async Task CreateAsync(BabylonCanvasBase canvas)
+	{
+	...
+	}
 }
 ```
 2. Create Data class
@@ -216,16 +219,16 @@ public class MyCustomData:IData
 ```C#
 public class MyCustomCanvas : BabylonCanvasBase
 {
-       protected virtual async Task InitializeSzene(LibraryWrapper LibraryWrapper, string canvasId)
-        {
-            MyCustomData panelData;
-            if (ChemicalData is MyCustomData)
-            {
-                panelData = (MyCustomData)SceneData;
-	            MySceneCreator creator = new MySceneCreator(LibraryWrapper, canvasId, panelData);
-    	        await creator.CreateAsync(this);
-            }
-        }
+	   protected virtual async Task InitializeSzene(LibraryWrapper LibraryWrapper, string canvasId)
+		{
+			MyCustomData panelData;
+			if (ChemicalData is MyCustomData)
+			{
+				panelData = (MyCustomData)SceneData;
+				MySceneCreator creator = new MySceneCreator(LibraryWrapper, canvasId, panelData);
+				await creator.CreateAsync(this);
+			}
+		}
 }
 ```
 4. Create new Rasor component
@@ -241,9 +244,9 @@ public class MyCustomCanvas : BabylonCanvasBase
  
  ```csharp
 <BabylonCanvas CanvasId="Canvas1" SceneData=@PanelData>
-    <LoadingTemplate>
-        <div>Loading Custom Demo...</div>
-    </LoadingTemplate>
+	<LoadingTemplate>
+		<div>Loading Custom Demo...</div>
+	</LoadingTemplate>
 </BabylonCanvas>
 ```
  

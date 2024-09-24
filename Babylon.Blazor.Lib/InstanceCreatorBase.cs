@@ -1,6 +1,9 @@
-using System.Threading.Tasks;
-
+﻿using System.Threading.Tasks;
+#if NET8_0_OR_GREATER
 using Microsoft.JSInterop;
+#else
+using Microsoft.JSInterop;
+#endif
 
 namespace Babylon.Blazor;
 
